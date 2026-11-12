@@ -1,0 +1,564 @@
+/* =========================================================
+   Week 2: CSS - Styled Personal Portfolio
+   Author: Yethendra Sai Gantala
+   ========================================================= */
+
+/* 1. Reset default styles & Box Model */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Color Scheme & Typography Variables (:root) */
+:root {
+  --primary-color: #4f46e5;
+  --primary-dark: #4338ca;
+  --secondary-color: #1e1b4b;
+  --accent-color: #06b6d4;
+  --highlight-color: #ec4899;
+  --bg-color: #f1f5f9;
+  --surface-color: #ffffff;
+  --surface-alt: #f1f5f9;
+  --text-color: #0f172a;
+  --muted-color: #475569;
+  --border-color: #e2e8f0;
+  --success-bg: #ecfdf5;
+  --success-border: #10b981;
+  --success-text: #065f46;
+  --radius: 16px;
+  --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 14px 32px -12px rgba(15, 23, 42, 0.14);
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  color: var(--secondary-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* 3. Sticky Header & Flexbox Navigation */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 55%, #0284c7 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 24px rgba(30, 27, 75, 0.24);
+}
+
+.nav-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.brand span {
+  display: block;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #cbd5e1;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* 4. Main Container & Section Cards */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+section {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 5.5rem;
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary-color);
+  background-color: #eff6ff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+/* 5. About Section (CSS Grid + Relative/Absolute Positioning) */
+#about {
+  background: linear-gradient(135deg, #eef2ff 0%, #f0f9ff 55%, #fdf2f8 100%);
+  border-color: #c7d2fe;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.profile-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-md);
+  background-color: var(--surface-alt);
+}
+
+.profile-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.4s ease;
+}
+
+.profile-frame:hover img {
+  transform: scale(1.03);
+}
+
+.profile-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+.about-content p {
+  color: var(--muted-color);
+  margin-bottom: 1rem;
+  font-size: 1.02rem;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+/* 6. Interactive Buttons & Hover Effects */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.4rem;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform var(--transition), background-color var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.28);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4338ca 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.38);
+}
+
+.btn-outline {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--surface-alt);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* 7. Skills Section (CSS Grid + Card Hover) */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.skill-card {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-color);
+}
+
+.skill-card h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.skill-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.skill-card li {
+  position: relative;
+  padding-left: 1.35rem;
+  color: var(--muted-color);
+  font-size: 0.94rem;
+}
+
+.skill-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* 8. Gallery Section (Grid + Centering + Hover) */
+.gallery-intro {
+  color: var(--muted-color);
+  margin-bottom: 1.35rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+figure.gallery-item {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+figure.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+  padding: 1rem;
+}
+
+.gallery-thumb svg {
+  width: 56px;
+  height: 56px;
+  color: var(--primary-color);
+  transition: transform var(--transition);
+}
+
+figure.gallery-item:hover .gallery-thumb svg {
+  transform: scale(1.1);
+}
+
+figure.gallery-item figcaption {
+  padding: 1rem 1.15rem;
+  font-size: 0.92rem;
+  color: var(--muted-color);
+}
+
+figure.gallery-item figcaption strong {
+  display: block;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+/* 9. Contact Section & Form Styling */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.contact-info p {
+  color: var(--muted-color);
+  margin-bottom: 1.1rem;
+}
+
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.contact-links li strong {
+  color: var(--text-color);
+  margin-right: 0.35rem;
+}
+
+form.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+  background-color: var(--surface-color);
+}
+
+.form-status {
+  display: none;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background-color: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success-text);
+  font-size: 0.92rem;
+}
+
+.form-status.visible {
+  display: block;
+}
+
+/* 10. Footer */
+footer {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #0369a1 100%);
+  color: #e2e8f0;
+  padding: 1.75rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+footer a {
+  color: #93c5fd;
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+/* 11. Responsive Design (Mobile & Tablet) */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  section {
+    padding: 1.5rem;
+  }
+
+  .about-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-frame {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    text-align: center;
+  }
+
+  .about-actions {
+    justify-content: center;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Vibrant Card Accents */
+.skill-card {
+  border-top: 4px solid var(--primary-color);
+}
+.skill-card:nth-child(2) {
+  border-top-color: var(--accent-color);
+}
+.skill-card:nth-child(3) {
+  border-top-color: var(--highlight-color);
+}
+
+.gallery-item:nth-child(1) .gallery-thumb {
+  background: linear-gradient(135deg, #e0e7ff 0%, #bae6fd 100%);
+}
+.gallery-item:nth-child(2) .gallery-thumb {
+  background: linear-gradient(135deg, #ccfbf1 0%, #a7f3d0 100%);
+}
+.gallery-item:nth-child(2) .gallery-thumb svg {
+  color: #0d9488;
+}
+.gallery-item:nth-child(3) .gallery-thumb {
+  background: linear-gradient(135deg, #fce7f3 0%, #fde68a 100%);
+}
+.gallery-item:nth-child(3) .gallery-thumb svg {
+  color: #db2777;
+}
